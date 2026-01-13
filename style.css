@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Zeyada&display=swap');
+
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('images/bg.jpg');
+    background-size: 1000px;
+    background-position: center;
+    overflow: hidden;
+}
+
+.paper {
+    position: absolute;
+    background-image: url('images/graph-paper-background.jpg');
+    background-size: 500px;
+    padding: 20px 100px;
+    transform: rotate(-5deg);
+    box-shadow: 1px 15px 20px rgba(0, 0, 0, 0.3);
+    cursor: grab;
+}
+
+.paper:active {
+    cursor: grabbing;
+}
+
+.paper.image {
+    padding: 10px;
+}
+
+.paper.image p {
+    font-size: 30px;
+}
+
+.paper.heart {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    padding: 0;
+    border-radius: 50%;
+}
+
+.paper.heart::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('images/360_F_189770305_KfsgGqttJkmZIm3YN8pXHTK3jKSQrjZ2.jpg');
+    background-size: 150px;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.6;
+}
+
+img {
+    max-height: 200px;
+    width: 100%;
+    user-select: none;
+    pointer-events: none;
+}
+
+p {
+    font-family: 'Zeyada', cursive;
+    font-size: 50px;
+    color: rgb(0, 0, 100);
+    opacity: 0.75;
+    margin: 5px;
+    user-select: none;
+}

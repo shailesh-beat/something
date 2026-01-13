@@ -1,26 +1,50 @@
-const papers = document.querySelectorAll('.paper');
-
-let activePaper = null;
-let offsetX = 0;
-let offsetY = 0;
-let zIndex = 1;
+const papers = document.querySelectorAll(".paper");
 
 papers.forEach(paper => {
-    paper.addEventListener('mousedown', (e) => {
-        activePaper = paper;
-        offsetX = e.clientX - paper.offsetLeft;
-        offsetY = e.clientY - paper.offsetTop;
-        paper.style.zIndex = ++zIndex;
-    });
+  let dragging = false;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  function start(x, y) {
+    dragging = true;
+    offsetX = x - paper.offsetLeft;
+    offsetY = y - paper.offsetTop;
+  }
+
+  function move(x, y) {
+    if (!dragging) return;
+    paper.style.left = x - offsetX + "px";
+    paper.style.top = y - offsetY + "px";
+  }
+
+  function stop() {
+    dragging = false;
+  }
+
+  // Desktop
+  paper.addEventListener("mousedown", e => {
+    start(e.clientX, e.clientY);
+  });
+
+  document.addEventListener("mousemove", e => {
+    move(e.clientX, e.clientY);
+  });
+
+  document.addEventListener("mouseup", stop);
+
+  // Mobile
+  paper.addEventListener("touchstart", e => {
+    const t = e.touches[0];
+    start(t.clientX, t.clientY);
+  }, { passive: true });
+
+  document.addEventListener("touchmove", e => {
+    const t = e.touches[0];
+    move(t.clientX, t.clientY);
+  }, { passive: true });
+
+  document.addEventListener("touchend", stop);
 });
 
-document.addEventListener('mousemove', (e) => {
-    if (!activePaper) return;
+            
 
-    activePaper.style.left = e.clientX - offsetX + 'px';
-    activePaper.style.top = e.clientY - offsetY + 'px';
-});
-
-document.addEventListener('mouseup', () => {
-    activePaper = null;
-});
